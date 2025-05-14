@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class Grid : MonoBehaviour
 {
@@ -35,14 +36,45 @@ public class Grid : MonoBehaviour
         return _grid[x, y];   
     }
     public int variable { get { return 10; } set { } }
-    public List<Node> Neighbords
-    {
-        get
-        {
-            if (_neighbords.Count > 0)
-                return _neighbords;
-            
-            return _neighbords;
-        }
-    }
+    //public List<Node> Neighbords
+    //{
+    //    get
+    //    {
+    //        if (_neighbords.Count > 0)
+    //            return _neighbords;
+
+    //        var right = _grid.GetNode(_x + 1, _y);
+    //        if(right != null)
+    //            _neighbords.Add(right);
+
+
+    //        var left = _grid.GetNode(_x - 1, _y);
+    //        if (left != null)
+    //            _neighbords.Add(left);
+
+
+    //        var up = _grid.GetNode(_x, 1 + _y);
+    //        if (up != null)
+    //            _neighbords.Add(up);
+
+
+    //        var down = _grid.GetNode(_x, 1 - _y);
+    //        if (down != null)
+    //            _neighbords.Add(down);
+
+
+
+    //        return _neighbords;
+    //    }
+    //}
+
+    //private void OnMouseOver()
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        GetComponent<MeshRenderer>().material.color = Color.green;
+
+    //        foreach (item)
+    //    }
+    //}
 }

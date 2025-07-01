@@ -407,7 +407,6 @@ MonoBehaviour:
   start: {fileID: 221529627}
   end: {fileID: 1771089655}
   player: {fileID: 1141022473}
-  grid: {fileID: 1843735935}
   layerMask:
     serializedVersion: 2
     m_Bits: 64

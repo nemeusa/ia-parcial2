@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public Pathfinding pathfinding;
     public Node start, end;
     public Player player;
-    public Grid grid;
     public LayerMask layerMask;
 
     private void Awake()
@@ -23,44 +22,12 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                grid.ResetNodes();
-                var path = pathfinding.CalculateBFS(start, end);
-
-                player.SetPath(path);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                grid.ResetNodes();
-                var path = pathfinding.CalculateDijkstra(start, end);
-
-                player.SetPath(path);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                grid.ResetNodes();
-                var path = pathfinding.CalculateGreedyBFS(start, end);
-
-                player.SetPath(path);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                grid.ResetNodes();
                 var path = pathfinding.CalculateAStar(start, end);
 
                 player.SetPath(path);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                grid.ResetNodes();
-                var path = pathfinding.CalculateTheta(start, end);
-
-                player.SetPath(path);
-            }
-
+          
         }
     }
     public void SetStartNode(Node node)

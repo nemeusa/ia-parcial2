@@ -5,7 +5,7 @@ using UnityEngine.Android;
 
 public class Grid : MonoBehaviour
 {
-    public List<Node> neighbords = new List<Node>();
+    public List<Node> neighbours = new List<Node>();
 
     public Node prefab;
     Node[,] _grid;

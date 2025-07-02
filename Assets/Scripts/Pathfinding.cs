@@ -31,7 +31,7 @@ public class Pathfinding : MonoBehaviour
 
                 return path;
             }
-            foreach (var node in current.Neighbords)
+            foreach (var node in current.Neighbours)
             {
                 if (node.Block) continue;
 

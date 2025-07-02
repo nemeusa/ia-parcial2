@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public List<Node> neighbords = new List<Node>();
+    public List<Node> neighbours = new List<Node>();
     int _x, _y;
     Grid _grid;
-    public bool Block { get; private set; }
-    public int Cost { get; private set; }
+    public bool Block;
+    public int Cost;
 
     [SerializeField] TMP_Text _text;
     public void Initialize(Grid grid, int x, int y)
@@ -20,35 +20,35 @@ public class Node : MonoBehaviour
         ModifyCost(1);
     }
 
-    public List<Node> Neighbords
+    public List<Node> Neighbours
     {
         get
         {
-            if (neighbords.Count > 0)
-                return neighbords;
+            if (neighbours.Count > 0)
+                return neighbours;
 
             var right = _grid.GetNode(_x + 1, _y);
             if (right != null)
-                neighbords.Add(right);
+                neighbours.Add(right);
 
 
             var left = _grid.GetNode(_x - 1, _y);
             if (left != null)
-                neighbords.Add(left);
+                neighbours.Add(left);
 
 
             var up = _grid.GetNode(_x, 1 + _y);
             if (up != null)
-                neighbords.Add(up);
+                neighbours.Add(up);
 
 
             var down = _grid.GetNode(_x, _y - 1);
             if (down != null)
-                neighbords.Add(down);
+                neighbours.Add(down);
 
 
 
-            return neighbords;
+            return neighbours;
         }
     }
 
@@ -101,7 +101,7 @@ public class Node : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        foreach (var item in neighbords)
+        foreach (var item in neighbours)
         {
             Gizmos.DrawLine(transform.position, item.transform.position);
         }

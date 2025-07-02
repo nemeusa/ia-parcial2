@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReturningPatrolState : MonoBehaviour
+public class ReturningPatrolState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    FSM<TypeFSM> _fsm;
+    Enemy _enemy;
+
+    public ReturningPatrolState(FSM<TypeFSM> fsm, Enemy enemy)
     {
-        
+        _fsm = fsm;
+        _enemy = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnEnter()
     {
-        
+        _enemy.GetComponent<MeshRenderer>().material.color = Color.white;
+        Debug.Log("Returning to patrol points...");
+    }
+
+    public void OnUpdate()
+    {
+    }
+
+    public void OnExit()
+    {
     }
 }

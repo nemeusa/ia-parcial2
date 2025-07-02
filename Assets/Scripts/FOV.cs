@@ -8,14 +8,6 @@ public class FOV : MonoBehaviour
     public float viewAngle;
     public Transform characterTarget;
 
-    private void Update()
-    {
-        if (InFOV(characterTarget))
-            GetComponent<MeshRenderer>().material.color = Color.red;
-        else
-            GetComponent<MeshRenderer>().material.color = Color.white;
-
-    }
     public bool InFOV(Transform target)
     {
         var dir = target.position - transform.position;

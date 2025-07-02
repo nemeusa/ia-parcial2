@@ -1,18 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    FSM<TypeFSM> _fsm;
+
+    public float speed = 3f;
+    public List<Node> patrolPoints;
+
+    public float _waitPoint;
+
+    public int patrolIndex = 0;
+    public Coroutine pathRoutine;
+
+    public  GameManager gameManager;
+
+    public FOV fov;
+
+    public Transform characterTarget;
+
+    void Awake()
     {
-        
+
+        fov = GetComponent<FOV>();
+
+        _fsm = new FSM<TypeFSM>();
+        _fsm.AddState(TypeFSM.Patrolling, new PatrollingState(_fsm, this));
+        _fsm.AddState(TypeFSM.Chasing, new ChasingState(_fsm, this));
+        _fsm.AddState(TypeFSM.Returning, new ReturningPatrolState(_fsm, this));
+        _fsm.AddState(TypeFSM.Searching, new SearchingState(_fsm, this));
+
+        _fsm.ChangeState(TypeFSM.Patrolling);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _fsm.Execute();
     }
+
+}
+
+public enum TypeFSM
+{
+    Patrolling,
+    Chasing,
+    Returning,
+    Searching
 }

@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchingState : MonoBehaviour
+public class SearchingState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    FSM<TypeFSM> _fsm;
+    Enemy _enemy;
+
+    public SearchingState(FSM<TypeFSM> fsm, Enemy enemy)
     {
-        
+        _fsm = fsm;
+        _enemy = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnEnter()
     {
-        
+
+    }
+
+    public void OnUpdate()
+    {
+
+    }
+
+    public void OnExit()
+    {
     }
 }
+

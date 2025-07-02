@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
 
                 player.SetPath(path);
             }
-
-          
         }
     }
     public void SetStartNode(Node node)

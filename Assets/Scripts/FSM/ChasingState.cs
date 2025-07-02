@@ -1,18 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class ChasingState : MonoBehaviour
+public class ChasingState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    FSM<TypeFSM> _fsm;
+    Enemy _enemy;
+
+    public ChasingState(FSM<TypeFSM> fsm, Enemy enemy)
     {
-        
+        _fsm = fsm;
+        _enemy = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnEnter()
     {
-        
+        Debug.Log("Chasing the player...");
+        _enemy.GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+
+    public void OnUpdate()
+    {
+        Vector3 direccion = (_enemy.characterTarget.position - _enemy.transform.position).normalized;
+        _enemy.transform.position += direccion * (_enemy.speed * 1.5f) * Time.deltaTime;
+        if (!_enemy.fov.InFOV(_enemy.fov.characterTarget))
+        {
+            Debug.Log("Player no detected, switching to chasing state.");
+            _fsm.ChangeState(TypeFSM.Returning);
+        }
+    }
+
+    public void OnExit()
+    {
     }
 }

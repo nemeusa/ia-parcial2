@@ -7,6 +7,8 @@ public class PatrollingState : State
     FSM<TypeFSM> _fsm;
     Enemy _enemy;
 
+    List<Node> _path;
+
     public PatrollingState(FSM<TypeFSM> fsm, Enemy enemy)
     {
         _fsm = fsm;
@@ -24,15 +26,17 @@ public class PatrollingState : State
 
     public void OnUpdate()
     {
+        Debug.Log("update patrol");
         if (_enemy.fov.InFOV(_enemy.characterTarget))
         {
-            Debug.Log("Player detected, switching to chasing state.");
             _fsm.ChangeState(TypeFSM.Chasing);
         }
     }
 
     public void OnExit()
     {
+        Debug.Log("exit patrol");
+        _enemy.StopCoroutine(FollowPath(_path));
     }
 
 
@@ -42,6 +46,7 @@ public class PatrollingState : State
         var next = _enemy.patrolPoints[(_enemy.patrolIndex + 1) % _enemy.patrolPoints.Count];
 
         var path = _enemy.gameManager.pathfinding.CalculateAStar(current, next);
+        _path = path;
 
         if (path.Count > 0)
         {
@@ -60,11 +65,15 @@ public class PatrollingState : State
 
         while (path.Count > 0)
         {
+            if (_fsm.CurrentStateKey != TypeFSM.Patrolling)
+                yield break;
+
             var dir = path[0].transform.position - _enemy.transform.position;
             _enemy.transform.forward = dir;
 
             _enemy.transform.position += _enemy.transform.forward * _enemy.speed * Time.deltaTime;
 
+            Debug.Log("patrol");
             if (dir.magnitude <= 0.2f)
                 path.RemoveAt(0);
 

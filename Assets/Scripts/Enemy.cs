@@ -40,6 +40,22 @@ public class Enemy : MonoBehaviour
         _fsm.Execute();
     }
 
+    public Node FindClosestNode()
+    {
+        Node closest = null;
+        float minDist = Mathf.Infinity;
+        //foreach (var node in gameManager.pathfinding.GetAllNodes())
+        //{
+        //    float dist = Vector3.Distance(transform.position, node.transform.position);
+        //    if (dist < minDist)
+        //    {
+        //        minDist = dist;
+        //        closest = node;
+        //    }
+        //}
+        return closest;
+    }
+
 }
 
 public enum TypeFSM

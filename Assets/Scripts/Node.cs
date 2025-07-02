@@ -20,6 +20,12 @@ public class Node : MonoBehaviour
         ModifyCost(1);
     }
 
+    private void Update()
+    {
+        _text.text = Cost.ToString();
+
+    }
+
     public List<Node> Neighbours
     {
         get
